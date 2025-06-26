@@ -9,11 +9,25 @@ const fetchUserData = () => {
         }
         return response.json();
         })
-        .then((data) => {
-        console.log("data received of todes", data);
-        }).catch(error => {
-        console.error("NETWORK ERROR:", error);
-    });
+        .then(todos => {
+                const output = document.getElementById('output');
+                for (let i = 0; i < todos.length; i++) {
+                    const todo = todos[i];
+                    const p = document.createElement('p');
+                    p.innerText = todo.title;
+                    output.append(p);
+                }
+            })
+            .catch(error => {
+                document.getElementById('output').innerText = "Error loading data.";
+            });
+        // .then((data) => {
+        // console.log("data received of todes", data);
+        // }).catch(error => {
+        // console.error("NETWORK ERROR:", error);
+    //     .catch(error => {
+    //             document.getElementById("output").innerText = "Error loading data.";
+    // });
 
     const use = fetch("https://jsonplaceholder.typicode.com/users");
     use
